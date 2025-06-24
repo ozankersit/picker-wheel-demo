@@ -17,10 +17,10 @@ export default function ItemForm() {
   }
 
   return (
-    <form action={handleSubmit}>
-      <input name="item" type="text" placeholder="Yeni item girin..." required />
+    <form action={handleSubmit} className="basis-1/2 ml-auto">
+      <input name="item" type="text" placeholder="Add An Item" required />
       <button type="submit" disabled={isPending}>
-        {isPending ? "Ekleniyor..." : "Ekle"}
+        {isPending ? "Adding..." : "Submit"}
       </button>
     </form>
   )
