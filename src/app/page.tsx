@@ -1,6 +1,7 @@
 import { clearList } from "@/components/item-actions/action";
 import ItemForm from "@/components/item-form/item-form";
 import ItemList from "@/components/item-list/item-list";
+import Wheel from "@/components/wheel/wheel";
 import { cookies } from "next/headers";
 
 export default async function Home() {
@@ -17,9 +18,9 @@ export default async function Home() {
   }
 
   return (
-    <div className="flex container items-start">
+    <div className="flex container md:flex-row flex-col-reverse mx-auto md:items-start items-stretch">
       <div className="basis-2/3">
-        WHEEL
+        <Wheel items={items} />
       </div>
       <div className="flex flex-col basis-1/3 gap-3 w-full">
         <ItemForm />
