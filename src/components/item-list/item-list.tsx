@@ -1,5 +1,4 @@
-"use client"
-import { useTransition } from "react";
+"use client";
 import { deleteItem } from "../item-actions/action";
 
 type Props = {
@@ -7,13 +6,10 @@ type Props = {
 };
 
 export default function ItemList({ items }: Props) {
-    const [isPending, startTransition] = useTransition();
 
-  const handleDelete = (index: number) => {
-    startTransition(async () => {
-      await deleteItem(index);
-    });
-  };
+  async function handleDelete (index:number) {
+    await deleteItem(index);
+  }
   return (
     <>
       {items.map((item: string, index: number) => (

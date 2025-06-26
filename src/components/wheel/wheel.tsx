@@ -18,6 +18,7 @@ export default function Wheel({ items }: WheelPickerProps) {
   const [isSpinning, setIsSpinning] = useState(false)
   const [rotation, setRotation] = useState(0)
   const segmentsRef = useRef<WheelSegment[]>([])
+  const audioRef = useRef<HTMLAudioElement | null>(null)
 
   // Sabit renkler
   const colors = [
@@ -86,9 +87,6 @@ export default function Wheel({ items }: WheelPickerProps) {
       ctx.closePath()
       ctx.fillStyle = segment.color
       ctx.fill()
-      ctx.strokeStyle = "#fff"
-      ctx.lineWidth = 3
-      ctx.stroke()
 
       // Metin ekle
       ctx.save()
@@ -131,11 +129,31 @@ export default function Wheel({ items }: WheelPickerProps) {
     drawWheel()
   }, [rotation, drawWheel, items])
 
+  const handlePlayMusic = () => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio('https://orangefreesounds.com/wp-content/uploads/2025/01/Spinning-prize-wheel-sound-effect.mp3');
+      audioRef.current.loop = true;
+    }
+
+    audioRef.current
+      .play()
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  };
+
+  const handlePauseMusic = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
+  };
+
   // Çark döndür
   const spinWheel = () => {
     if (isSpinning || items.length === 0) return
 
     setIsSpinning(true)
+    handlePlayMusic()
 
     // Rastgele döndürme
     const spins = Math.random() * 3 + 5
@@ -143,7 +161,7 @@ export default function Wheel({ items }: WheelPickerProps) {
     const totalRotation = spins * 360 + finalAngle
 
     const startRotation = rotation
-    const duration = 4000
+    const duration = 3000
     const startTime = Date.now()
 
     const animate = () => {
@@ -159,6 +177,7 @@ export default function Wheel({ items }: WheelPickerProps) {
         requestAnimationFrame(animate)
       } else {
         setIsSpinning(false)
+        handlePauseMusic()
       }
     }
 
@@ -166,24 +185,24 @@ export default function Wheel({ items }: WheelPickerProps) {
   }
 
   return (
-    <div className="flex flex-col items-center p-8">
-      <div className="relative mb-6">
+    <div className="flex flex-col items-center">
+      <div className="relative mb-6 w-full max-w-xl">
         <canvas
           ref={canvasRef}
-          width={400}
-          height={400}
-          className="border-4 border-gray-300 rounded-full cursor-pointer shadow-lg hover:shadow-xl transition-shadow"
+          width={576}
+          height={576}
+          className="border-4 border-gray-300 rounded-full cursor-pointer shadow-lg hover:shadow-xl transition-shadow w-full aspect-square"
           onClick={spinWheel}
         />
       </div>
 
-      <button
+      {/* <button
         onClick={spinWheel}
         disabled={isSpinning}
         className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-lg font-bold rounded-lg hover:from-blue-600 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:scale-105"
       >
         Spin
-      </button>
+      </button> */}
     </div>
   )
 }

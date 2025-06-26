@@ -32,7 +32,7 @@ export const deleteItem = async (indexToDelete: number) => {
 
   try {
     const items = JSON.parse(wheelItems.value) as string[];
-    const updatedItems = items.filter((_, index) => index !== indexToDelete);
+    const updatedItems = items.filter((_, index) => index !== indexToDelete); // burda "===" olarak alırsam dizide sadece silmek istediğimi tutar ben dizide silmeyi istediğim item hariç diğerlerini tutmak istediğim için "!==" kullanıyorum
     cookieStore.set("wheelItems", JSON.stringify(updatedItems));
     if (updatedItems.length === 0) {
       await clearList();

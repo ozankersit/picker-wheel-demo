@@ -18,15 +18,15 @@ export default async function Home() {
   }
 
   return (
-    <div className="flex container md:flex-row flex-col-reverse mx-auto md:items-start items-stretch">
-      <div className="basis-2/3">
+    <div className="flex container md:px-0 px-5 py-3 md:flex-row flex-col-reverse mx-auto md:items-start items-stretch gap-5">
+      <div className="basis-1/2">
         <Wheel items={items} />
       </div>
-      <div className="flex flex-col basis-1/3 gap-3 w-full">
+      <div className="flex flex-col basis-1/2 gap-3 w-full">
         <ItemForm />
         <div className="flex justify-between items-center">
           <p className="font-bold text-3xl">List</p>
-          <button onClick={clearList}>Clear All List</button>
+          <button onClick={clearList} className="underline cursor-pointer">Clear All List</button>
         </div>
         {items.length > 0 && <ItemList items={items} />}
       </div>
