@@ -132,6 +132,7 @@ export default function Wheel({ items }: WheelPickerProps) {
   const handlePlayMusic = () => {
     if (!audioRef.current) {
       audioRef.current = new Audio('https://orangefreesounds.com/wp-content/uploads/2025/01/Spinning-prize-wheel-sound-effect.mp3');
+      audioRef.current.volume = 0.3;
     }
 
     audioRef.current
