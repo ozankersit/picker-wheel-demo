@@ -195,14 +195,6 @@ export default function Wheel({ items }: WheelPickerProps) {
           onClick={spinWheel}
         />
       </div>
-
-      {/* <button
-        onClick={spinWheel}
-        disabled={isSpinning}
-        className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-lg font-bold rounded-lg hover:from-blue-600 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:scale-105"
-      >
-        Spin
-      </button> */}
     </div>
   )
 }

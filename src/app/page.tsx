@@ -25,7 +25,7 @@ export default async function Home() {
       <div className="flex flex-col basis-1/2 gap-3 w-full">
         <ItemForm />
         <div className="flex justify-between items-center">
-          <p className="font-bold text-3xl">List</p>
+          <p className="font-bold text-3xl font-mono">List</p>
           <button onClick={clearList} className="underline cursor-pointer">Clear All List</button>
         </div>
         {items.length > 0 && <ItemList items={items} />}
